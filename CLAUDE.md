@@ -121,7 +121,7 @@ You are not expected to solve every problem autonomously. You MUST invoke the us
 - Never hardcode secrets or tokens; use `.env` and docs.
 - Prefer the smallest viable diff; do not refactor unrelated code.
 - Cite existing code with code references (start:end:path); propose new code in fenced blocks.
-- After every successful task completion and PHR creation, automatically push changes to the configured remote repository.
+- After every successful task completion and PHR creation, automatically push changes to the configured remote repository, including to the `master` (main) branch when appropriate.
 - Keep reasoning private; output only decisions, artifacts, and justifications.
 
 ### Execution contract for every request
