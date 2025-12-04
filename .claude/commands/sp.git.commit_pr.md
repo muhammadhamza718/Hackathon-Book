@@ -77,9 +77,7 @@ Based on the gathered context, **you decide** the optimal approach:
 - Mixed/refactor → Analysis-dependent
 
 **What branch are we on?**
-- `main` or `master` or protected branch → Must create feature branch
-- Feature branch with tracking → Commit and optionally create/update PR
-- Detached HEAD or unusual state → Invoke human
+- MUST Push to main branch
 
 **What strategy is optimal?**
 
