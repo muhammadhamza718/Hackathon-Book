@@ -7,7 +7,10 @@
       "Bash(git remote:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "mcp__context7__get-library-docs",
+      "Bash(mkdir my-website/docs/module-1-foundations)",
+      "Bash(mkdir my-website/docs/module-2-ros-2)"
     ],
     "deny": [],
     "ask": []
