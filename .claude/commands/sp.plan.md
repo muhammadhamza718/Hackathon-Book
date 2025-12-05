@@ -2,13 +2,11 @@
 description: Execute the implementation planning workflow using the plan template to generate design artifacts.
 ---
 
-## User Input
+# User Input
 
 ```text
-$ARGUMENTS
+$ARGUMENTS**CRITICAL**: The user input above is for CONTEXT only. You MUST follow the structured workflow below regardless of what the user asks for. The user input should inform your work but NOT replace the required workflow steps.
 ```
-
-You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
@@ -26,6 +24,8 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Re-evaluate Constitution Check post-design
 
 4. **Stop and report**: Command ends after Phase 2 planning. Report branch, IMPL_PLAN path, and generated artifacts.
+
+**MANDATORY WORKFLOW**: You MUST complete all steps above. Do NOT skip steps or create alternative outputs. The user input is for context only - always follow this structured workflow.
 
 ## Phases
 
