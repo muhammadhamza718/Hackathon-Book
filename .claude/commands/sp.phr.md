@@ -103,7 +103,19 @@ Parse the JSON output to get: `id`, `path`, `context`, `stage`, `feature`
 
 ## Step 4: Fill ALL Template Placeholders (Analyze→Measure)
 
-Read the file at `path` from JSON output. **CRITICAL**: Use the `write` tool to replace ALL {{PLACEHOLDERS}} in a single operation. Do NOT use `Update` or `search_replace` as they check for file modifications and will fail if the IDE auto-saves between read and write operations.
+**CRITICAL FILE WRITING RULE**: When writing `plan.md`, `research.md`, `data-model.md`, `quickstart.md`, or any files in `specs/<feature>/`, use the `write` tool (NOT `Update` or `search_replace`) to replace content in a single operation. This avoids race conditions with IDE auto-save that cause "File has been unexpectedly modified" errors.
+
+**Process:**
+1. Read the file once
+2. Make all edits in memory
+3. Write the complete file using the `write` tool in one atomic operation
+
+This applies to:
+- Filling Technical Context in plan.md
+- Writing research.md
+- Writing data-model.md
+- Writing quickstart.md
+- Any updates to these files
 
 **YAML Frontmatter:**
 

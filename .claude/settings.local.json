@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout -b 001-docusaurus-plan)",
+      "Bash(.specify/scripts/bash/setup-plan.sh:*)",
+      "mcp__github__get_file_contents",
+      "mcp__context7__get-library-docs",
+      "WebSearch"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -351,3 +351,9 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 ## Code Standards
 
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.
+
+## Active Technologies
+- JavaScript (Node.js v18.0+ or v20.0+) + React v18.0+, MDX v3.0+, TypeScript v5.1+, prism-react-renderer v2.0+, react-live v4.0+, remark-emoji v4.0+, mermaid v10.4+ (001-docusaurus-plan)
+
+## Recent Changes
+- 001-docusaurus-plan: Added JavaScript (Node.js v18.0+ or v20.0+) + React v18.0+, MDX v3.0+, TypeScript v5.1+, prism-react-renderer v2.0+, react-live v4.0+, remark-emoji v4.0+, mermaid v10.4+

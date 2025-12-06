@@ -15,6 +15,7 @@ $ARGUMENTS**CRITICAL**: The user input above is for CONTEXT only. You MUST follo
 2. **Load context**: Read FEATURE_SPEC and `.specify/memory/constitution.md`. Load IMPL_PLAN template (already copied).
 
 3. **Execute plan workflow**: Follow the structure in IMPL_PLAN template to:
+
    - Fill Technical Context (mark unknowns as "NEEDS CLARIFICATION")
    - Fill Constitution Check section from constitution
    - Evaluate gates (ERROR if violations unjustified)
@@ -32,6 +33,7 @@ $ARGUMENTS**CRITICAL**: The user input above is for CONTEXT only. You MUST follo
 ### Phase 0: Outline & Research
 
 1. **Extract unknowns from Technical Context** above:
+
    - For each NEEDS CLARIFICATION → research task
    - For each dependency → best practices task
    - For each integration → patterns task
@@ -56,17 +58,27 @@ $ARGUMENTS**CRITICAL**: The user input above is for CONTEXT only. You MUST follo
 
 **Prerequisites:** `research.md` complete
 
+**CRITICAL**: ALL Phase 1 outputs MUST be created, even if the project type doesn't traditionally use them. For non-applicable cases, create the files with clear "N/A" explanations.
+
 1. **Extract entities from feature spec** → `data-model.md`:
    - Entity name, fields, relationships
    - Validation rules from requirements
    - State transitions if applicable
+   - **For static sites/documentation**: Document content structure, metadata schemas, or configuration entities instead of traditional data models. If truly N/A, create file with explanation.
 
 2. **Generate API contracts** from functional requirements:
    - For each user action → endpoint
    - Use standard REST/GraphQL patterns
    - Output OpenAPI/GraphQL schema to `/contracts/`
+   - **For static sites/documentation**: Document content API structure, build-time interfaces, or plugin contracts. If truly N/A, create `/contracts/README.md` explaining why.
 
-3. **Agent context update**:
+3. **Create quickstart.md**:
+   - Setup instructions for developers/users
+   - Prerequisites and installation steps
+   - Basic usage examples
+   - **Always applicable**: Even documentation projects need setup instructions.
+
+4. **Agent context update**:
    - Run `.specify/scripts/bash/update-agent-context.sh claude`
    - These scripts detect which AI agent is in use
    - Update the appropriate agent-specific context file
@@ -75,26 +87,26 @@ $ARGUMENTS**CRITICAL**: The user input above is for CONTEXT only. You MUST follo
 
 **Output**: data-model.md, /contracts/*, quickstart.md, agent-specific file
 
-## Key rules
-
-- Use absolute paths
-- ERROR on gate failures or unresolved clarifications
+**MANDATORY**: All four outputs must exist. Use "N/A" explanations only when absolutely no equivalent exists for the project type.
 
 ---
 
 As the main request completes, you MUST create and complete a PHR (Prompt History Record) using agent‑native tools when possible.
 
-1) Determine Stage
+1. Determine Stage
+
    - Stage: constitution | spec | plan | tasks | red | green | refactor | explainer | misc | general
 
-2) Generate Title and Determine Routing:
+2. Generate Title and Determine Routing:
+
    - Generate Title: 3–7 words (slug for filename)
    - Route is automatically determined by stage:
      - `constitution` → `history/prompts/constitution/`
      - Feature stages → `history/prompts/<feature-name>/` (spec, plan, tasks, red, green, refactor, explainer, misc)
      - `general` → `history/prompts/general/`
 
-3) Create and Fill PHR (Shell first; fallback agent‑native)
+3. Create and Fill PHR (Shell first; fallback agent‑native)
+
    - Run: `.specify/scripts/bash/create-phr.sh --title "<title>" --stage <stage> [--feature <name>] --json`
    - Open the file and fill remaining placeholders (YAML + body), embedding full PROMPT_TEXT (verbatim) and concise RESPONSE_TEXT.
    - If the script fails:
@@ -102,6 +114,6 @@ As the main request completes, you MUST create and complete a PHR (Prompt Histor
      - Allocate an ID; compute the output path based on stage from step 2; write the file
      - Fill placeholders and embed full PROMPT_TEXT and concise RESPONSE_TEXT
 
-4) Validate + report
+4. Validate + report
    - No unresolved placeholders; path under `history/prompts/` and matches stage; stage/title/date coherent; print ID + path + stage + title.
    - On failure: warn, don't block. Skip only for `/sp.phr`.
