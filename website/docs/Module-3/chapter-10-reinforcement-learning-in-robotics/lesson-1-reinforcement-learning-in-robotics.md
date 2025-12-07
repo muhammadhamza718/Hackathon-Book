@@ -1,13 +1,34 @@
 ---
-title: 'Reinforcement Learning in Robotics'
-description: 'Introduction to reinforcement learning for robotics, explaining RL fundamentals (states, actions, rewards, policies) and applications in robotics'
+title: "Reinforcement Learning in Robotics"
+description: "Introduction to reinforcement learning for robotics, explaining RL fundamentals (states, actions, rewards, policies) and applications in robotics"
 chapter: 10
 lesson: 1
 module: 3
-sidebar_label: 'Reinforcement Learning in Robotics'
+sidebar_label: "Reinforcement Learning in Robotics"
 sidebar_position: 1
-tags: ['Reinforcement Learning', 'Robotics', 'RL Fundamentals', 'States', 'Actions', 'Rewards', 'Policies']
-keywords: ['reinforcement learning', 'robotics', 'RL fundamentals', 'states', 'actions', 'rewards', 'policies', 'Q-learning', 'actor-critic', 'robot control']
+tags:
+  [
+    "Reinforcement Learning",
+    "Robotics",
+    "RL Fundamentals",
+    "States",
+    "Actions",
+    "Rewards",
+    "Policies",
+  ]
+keywords:
+  [
+    "reinforcement learning",
+    "robotics",
+    "RL fundamentals",
+    "states",
+    "actions",
+    "rewards",
+    "policies",
+    "Q-learning",
+    "actor-critic",
+    "robot control",
+  ]
 ---
 
 # Reinforcement Learning in Robotics
@@ -32,11 +53,12 @@ Reinforcement Learning is based on the interaction between an agent and its envi
 - **Model**: Agent's representation of the environment
 
 The RL process follows this cycle:
-1. Agent observes state s_t
-2. Agent selects action a_t based on policy π
-3. Agent executes action a_t
-4. Environment transitions to state s_{t+1}
-5. Environment provides reward r_{t+1}
+
+1. Agent observes state s\_t
+2. Agent selects action a\_t based on policy π
+3. Agent executes action a\_t
+4. Environment transitions to state s\_{t+1}
+5. Environment provides reward r\_{t+1}
 6. Repeat
 
 ### Markov Decision Processes (MDPs)
@@ -819,6 +841,7 @@ class MADDPGAgent:
 ## Learning Objectives
 
 By the end of this lesson, you should be able to:
+
 - Understand the fundamental concepts of reinforcement learning and its application to robotics
 - Identify the key components of RL systems (states, actions, rewards, policies)
 - Implement basic RL algorithms like Q-Learning and Deep Q-Networks
