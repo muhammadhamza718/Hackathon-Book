@@ -12,11 +12,11 @@ const config: Config = {
   },
 
   // Update these for your GitHub Pages deployment
-  url: 'https://your-username.github.io', // Replace with your GitHub username
+  url: 'https://hackathon-book-mwoqt91dl-muhammad-hamzas-projects-88f218fc.vercel.app/', // Replace with your GitHub username
   baseUrl: '/hackathon-book/', // Replace with your repo name if different
 
   // GitHub pages deployment config
-  organizationName: 'your-username', // Replace with your GitHub username
+  organizationName: 'muhammadhamzas-projects', // Replace with your GitHub username
   projectName: 'hackathon-book', // Replace with your repo name
 
   onBrokenLinks: 'throw',
