@@ -1,56 +1,99 @@
-import type {ReactNode} from 'react';
-import clsx from 'clsx';
-import Heading from '@theme/Heading';
-import styles from './styles.module.css';
+import type { ReactNode, CSSProperties } from "react";
+import clsx from "clsx";
+import Link from "@docusaurus/Link";
+import Heading from "@theme/Heading";
+import styles from "./styles.module.css";
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  emoji: string;
   description: ReactNode;
+  link: string;
+  color: string;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: "Module 1: The Robotic Nervous System",
+    emoji: "🧠",
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Master ROS 2 fundamentals, development environment setup, URDF models,
+        and sensor interfaces. Build the foundation for robotic communication
+        and control.
       </>
     ),
+    link: "/docs/Module-1/chapter-1-introduction-to-ros-2/lesson-1-introduction-to-ros-2",
+    color: "#3578e5",
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: "Module 2: The Digital Twin",
+    emoji: "🌐",
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Learn Gazebo simulation, Unity visualization, and real-world sensor
+        integration. Create realistic digital twins of robotic systems.
       </>
     ),
+    link: "/docs/Module-2/chapter-5-introduction-to-gazebo/lesson-1-introduction-to-gazebo",
+    color: "#25c2a0",
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: "Module 3: The AI-Robot Brain",
+    emoji: "🤖",
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Explore NVIDIA Isaac platform, AI perception techniques, and
+        reinforcement learning. Build intelligent robotic systems with advanced
+        AI capabilities.
       </>
     ),
+    link: "/docs/Module-3/chapter-8-introduction-to-nvidia-isaac/lesson-1-introduction-to-nvidia-isaac",
+    color: "#ff6b6b",
+  },
+  {
+    title: "Module 4: Vision-Language-Action",
+    emoji: "🚶",
+    description: (
+      <>
+        Develop humanoid robots, master locomotion, and implement the VLA
+        paradigm. Create conversational and intelligent humanoid systems.
+      </>
+    ),
+    link: "/docs/Module-4/chapter-11-humanoid-robot-development/lesson-1-humanoid-robot-development",
+    color: "#9b59b6",
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({ title, emoji, description, link, color }: FeatureItem) {
   return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
-      </div>
-      <div className="text--center padding-horiz--md">
-        <Heading as="h3">{title}</Heading>
-        <p>{description}</p>
+    <div className={clsx("col col--3")}>
+      <div
+        className={clsx("card", styles.featureCard)}
+        style={{ "--feature-color": color } as CSSProperties}
+      >
+        <div className="card__header">
+          <div className={styles.emojiContainer}>{emoji}</div>
+          <Heading as="h3" className={styles.title}>
+            {title}
+          </Heading>
+        </div>
+        <div className="card__body">
+          <div className={styles.description}>{description}</div>
+        </div>
+        <div className="card__footer">
+          <Link
+            className={clsx(
+              "button",
+              "button--primary",
+              "button--block",
+              styles.button
+            )}
+            to={link}
+          >
+            Start Learning →
+          </Link>
+        </div>
       </div>
     </div>
   );
@@ -60,6 +103,13 @@ export default function HomepageFeatures(): ReactNode {
   return (
     <section className={styles.features}>
       <div className="container">
+        <div className="text--center margin-bottom--lg">
+          <Heading as="h2">Explore the Complete Curriculum</Heading>
+          <p className={styles.subtitle}>
+            Four comprehensive modules covering everything from ROS 2 basics to
+            advanced humanoid robotics
+          </p>
+        </div>
         <div className="row">
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />

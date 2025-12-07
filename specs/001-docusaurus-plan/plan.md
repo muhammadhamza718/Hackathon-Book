@@ -1,13 +1,13 @@
 # Implementation Plan: Docusaurus Website for Physical AI & Humanoid Robotics Book
 
-**Branch**: `001-docusaurus-plan` | **Date**: 2025-12-06 | **Spec**: [F:/Courses/Hamza/Hackathon-2/hackathon-book/specs/001-docusaurus-plan/spec.md]
-**Input**: Feature specification from `/specs/001-docusaurus-plan/spec.md`
+**Branch**: `001-docusaurus-plan` | **Date**: 2025-01-27 | **Spec**: [F:/Courses/Hamza/Hackathon-2/hackathon-book/specs/physical-ai-humanoid-robotics/spec.md]
+**Input**: Feature specification from `/specs/physical-ai-humanoid-robotics/spec.md`
 
 **Note**: This template is filled in by the `/sp.plan` command. See `.specify/templates/commands/plan.md` for the execution workflow.
 
 ## Summary
 
-This plan outlines the steps to create a Docusaurus website for the "Physical AI & Humanoid Robotics" book, including setup, content structure, and theme customization.
+This plan outlines the steps to create a Docusaurus website for the "Physical AI & Humanoid Robotics" book, including setup, content structure organized by 4 modules, and theme customization.
 
 ## Technical Context
 
@@ -19,7 +19,7 @@ This plan outlines the steps to create a Docusaurus website for the "Physical AI
 **Project Type**: Documentation website
 **Performance Goals**: Fast loading times, smooth navigation
 **Constraints**: Maintainability, ease of content updates
-**Scale/Scope**: 13 chapters, 3 lessons per chapter
+**Scale/Scope**: 4 modules, 13 chapters, 3 lessons per chapter (39 lessons total)
 
 ## Constitution Check
 
@@ -47,24 +47,44 @@ specs/001-docusaurus-plan/
 ### Source Code (repository root)
 
 ```text
-docs/
-├── chapter-1-introduction/
-│   ├── _category_.json
-│   ├── lesson-1-overview.md
-│   ├── lesson-2-history.md
-│   └── lesson-3-applications.md
-├── chapter-2-robot-kinematics/
-│   ├── _category_.json
-│   ├── lesson-1-forward-kinematics.md
-│   ├── lesson-2-inverse-kinematics.md
-│   └── lesson-3-jacobian-matrix.md
-... (up to 13 chapters)
-static/
-├── img/             # For general images (diagrams, figures)
-└── code-examples/   # For downloadable code examples
+website/docs/
+├── Module-1/                    # The Robotic Nervous System (ROS 2)
+│   ├── chapter-1-introduction-to-ros-2/
+│   │   ├── _category_.json
+│   │   ├── lesson-1-introduction-to-ros-2.md
+│   │   ├── lesson-2-ros-2-architecture.md
+│   │   └── lesson-3-core-ros-2-concepts.md
+│   ├── chapter-2-ros-2-development-environment-setup/
+│   │   ├── _category_.json
+│   │   ├── lesson-1-ros-2-development-environment-setup.md
+│   │   ├── lesson-2-creating-a-ros-2-package.md
+│   │   └── lesson-3-building-and-running-ros-2-code.md
+│   ├── chapter-3-understanding-and-creating-urdf-models/
+│   │   ├── _category_.json
+│   │   ├── lesson-1-understanding-and-creating-urdf-models.md
+│   │   ├── lesson-2-urdf-for-robot-kinematics.md
+│   │   └── lesson-3-advanced-urdf-features.md
+│   └── chapter-4-working-with-ros-2-sensor-interfaces/
+│       ├── _category_.json
+│       ├── lesson-1-working-with-ros-2-sensor-interfaces.md
+│       ├── lesson-2-ros-2-launch-files.md
+│       └── lesson-3-sensor-data-processing-in-ros-2.md
+├── Module-2/                    # The Digital Twin (Gazebo & Unity)
+│   ├── chapter-5-introduction-to-gazebo/
+│   ├── chapter-6-advanced-simulation-with-unity/
+│   └── chapter-7-integrating-real-world-sensors-into-simulation/
+├── Module-3/                    # The AI-Robot Brain (NVIDIA Isaac)
+│   ├── chapter-8-introduction-to-nvidia-isaac/
+│   ├── chapter-9-ai-perception-techniques-for-robots/
+│   └── chapter-10-reinforcement-learning-in-robotics/
+└── Module-4/                    # Vision-Language-Action (VLA)
+    ├── chapter-11-humanoid-robot-development/
+    ├── chapter-12-humanoid-robot-locomotion/
+    └── chapter-13-visual-language-agent-vla-paradigm/
+
 ```
 
-**Structure Decision**: The project will use the standard Docusaurus file structure, with content in the `docs` directory and assets in the `static` directory.
+**Structure Decision**: The project uses a Module-based directory structure aligned with the textbook's 4-module organization. Each module contains its chapters, and each chapter contains 3 lessons. This structure ensures clear organization and aligns with the Physical AI & Humanoid Robotics Textbook structure.
 
 ## Complexity Tracking
 

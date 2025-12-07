@@ -126,11 +126,15 @@ If ANY quota type (RPM, TPM, or RPD) is critically low (<20% remaining):
 
 ## Core Guarantees (Product Promise)
 
-- Record every user input verbatim in a Prompt History Record (PHR) after every user message. Do not truncate; preserve full multiline input.
+- **PHR Creation Prompt**: After completing ANY user request, you MUST prompt the user to run `/sp.phr` command to create a Prompt History Record (PHR). This is MANDATORY.
+  - **Do NOT create PHRs automatically** - Instead, after completing the task, explicitly ask the user to run `/sp.phr` command.
+  - **Prompt Format**: After completing your work, end your response with: "📝 **PHR Required**: Please run `/sp.phr` to create a Prompt History Record for this session."
+  - The user will run `/sp.phr` themselves, which will handle PHR creation with proper routing and formatting.
 - PHR routing (all under `history/prompts/`):
   - Constitution → `history/prompts/constitution/`
   - Feature-specific → `history/prompts/<feature-name>/`
   - General → `history/prompts/general/`
+- **PHR Prompt is Required**: No request is considered complete until you have prompted the user to run `/sp.phr`. Skip this prompt ONLY if the user request is explicitly asking you to run `/sp.phr` itself.
 - ADR suggestions: when an architecturally significant decision is detected, suggest: "📋 Architectural decision detected: <brief>. Document? Run `/sp.adr <title>`." Never auto‑create ADRs; require user consent.
 
 ## Development Guidelines
@@ -149,17 +153,33 @@ Treat MCP servers as first-class tools for discovery, verification, execution, a
 
 ### 3. Knowledge capture (PHR) for Every User Input.
 
-After completing requests, you **MUST** create a PHR (Prompt History Record).
+**MANDATORY**: After completing ANY request, you **MUST** prompt the user to run `/sp.phr` command to create a PHR (Prompt History Record). This is a non-negotiable requirement.
 
-**When to create PHRs:**
+**PHR Prompt Process:**
+
+1. **Complete the user's task first** - Finish all requested work.
+2. **Then prompt the user** - After completing your work, explicitly ask the user to run `/sp.phr` command.
+3. **Do NOT create PHRs yourself** - The user will run `/sp.phr` themselves, which handles routing, formatting, and file creation automatically.
+4. **Prompt Format**: Always end your response with: "📝 **PHR Required**: Please run `/sp.phr` to create a Prompt History Record for this session."
+
+**When to prompt for PHR:**
+
+**MANDATORY FOR ALL USER REQUESTS** - Prompt the user to run `/sp.phr` after completing every user request, including but not limited to:
 
 - Implementation work (code changes, new features)
 - Planning/architecture discussions
 - Debugging sessions
 - Spec/task/plan creation
 - Multi-step workflows
+- Questions and clarifications
+- File reading/editing operations
+- Any task that produces output or makes changes
+
+**Exception**: Only skip the PHR prompt if the user request is explicitly asking you to run `/sp.phr` itself.
 
 **PHR Creation Process:**
+
+**NOTE FOR CLAUDE CODE**: Do NOT follow this process yourself. This section documents what happens when the user runs `/sp.phr` command. Your job is to complete the user's task, then prompt them to run `/sp.phr`. The process below is for reference only.
 
 1. Detect stage
 
@@ -197,9 +217,9 @@ After completing requests, you **MUST** create a PHR (Prompt History Record).
    - Write the completed file with agent file tools (WriteFile/Edit).
    - Confirm absolute path in output.
 
-4. Use sp.phr command file if present
+4. **Critical**: Use sp.phr command file if present
 
-   - If `.**/commands/sp.phr.*` exists, follow its structure.
+   - **Optional**: If `.**/commands/sp.phr.*` exists, follow its structure.
    - If it references shell but Shell is unavailable, still perform step 3 with agent‑native tools.
 
 5. Shell fallback (only if step 3 is unavailable or fails, and Shell is permitted)
@@ -224,7 +244,8 @@ After completing requests, you **MUST** create a PHR (Prompt History Record).
 8. Report
    - Print: ID, path, stage, title.
    - On any failure: warn but do not block the main command.
-   - Skip PHR only for `/sp.phr` itself.
+
+**CRITICAL REMINDER**: After completing any user request, you MUST prompt the user to run `/sp.phr` command. Do NOT create PHRs automatically - always ask the user to run the command themselves. The exception is if the user request is explicitly asking you to run `/sp.phr` itself.
 
 ### 4. Explicit ADR suggestions
 
@@ -261,8 +282,10 @@ You are not expected to solve every problem autonomously. You MUST invoke the us
 2. List constraints, invariants, non‑goals.
 3. Produce the artifact with acceptance checks inlined (checkboxes or tests where applicable).
 4. Add follow‑ups and risks (max 3 bullets).
-5. Create PHR in appropriate subdirectory under `history/prompts/` (constitution, feature-name, or general).
+5. **MANDATORY: Prompt User for PHR** - After completing the task, you MUST prompt the user to run `/sp.phr` command. End your response with: "📝 **PHR Required**: Please run `/sp.phr` to create a Prompt History Record for this session." Do NOT create the PHR yourself - the user will run the command.
 6. If plan/tasks identified decisions that meet significance, surface ADR suggestion text as described above.
+
+**CRITICAL**: Step 5 (prompting user to run `/sp.phr`) is MANDATORY. Do not skip it unless the user request is explicitly asking you to run `/sp.phr` itself.
 
 ### Minimum acceptance criteria
 
@@ -353,7 +376,9 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.
 
 ## Active Technologies
+
 - JavaScript (Node.js v18.0+ or v20.0+) + React v18.0+, MDX v3.0+, TypeScript v5.1+, prism-react-renderer v2.0+, react-live v4.0+, remark-emoji v4.0+, mermaid v10.4+ (001-docusaurus-plan)
 
 ## Recent Changes
+
 - 001-docusaurus-plan: Added JavaScript (Node.js v18.0+ or v20.0+) + React v18.0+, MDX v3.0+, TypeScript v5.1+, prism-react-renderer v2.0+, react-live v4.0+, remark-emoji v4.0+, mermaid v10.4+
