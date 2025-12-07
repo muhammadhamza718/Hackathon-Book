@@ -57,8 +57,8 @@ The RL process follows this cycle:
 1. Agent observes state s_t
 2. Agent selects action a_t based on policy π
 3. Agent executes action a_t
-4. Environment transitions to state s\_{t+1}
-5. Environment provides reward r\_{t+1}
+4. Environment transitions to state s\_\{t+1}
+5. Environment provides reward r\_\{t+1}
 6. Repeat
 
 ### Markov Decision Processes (MDPs)
