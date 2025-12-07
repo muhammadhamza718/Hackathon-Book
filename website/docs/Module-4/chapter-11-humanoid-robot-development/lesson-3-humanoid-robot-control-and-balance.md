@@ -67,9 +67,9 @@ ZMP_y = (Σ(Fz_i * y_i) + Σ(M_x_i)) / Σ(Fz_i)
 ```
 
 Where:
-- Fz_i: Vertical force at contact point i
-- x_i, y_i: Position coordinates of contact point i
-- M_x_i, M_y_i: Moments at contact point i
+- Fz\_i: Vertical force at contact point i
+- x\_i, y\_i: Position coordinates of contact point i
+- M\_x\_i, M\_y\_i: Moments at contact point i
 
 ### ZMP Stability Criterion
 
@@ -204,7 +204,7 @@ Where:
 - u: control input
 - K: optimal gain matrix
 - x: system state
-- x_ref: reference state
+- x\_ref: reference state
 
 **Advantages**
 - Optimal performance for linearized system

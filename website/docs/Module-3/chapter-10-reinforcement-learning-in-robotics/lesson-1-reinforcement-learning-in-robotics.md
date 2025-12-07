@@ -54,9 +54,9 @@ Reinforcement Learning is based on the interaction between an agent and its envi
 
 The RL process follows this cycle:
 
-1. Agent observes state s\_t
-2. Agent selects action a\_t based on policy π
-3. Agent executes action a\_t
+1. Agent observes state s_t
+2. Agent selects action a_t based on policy π
+3. Agent executes action a_t
 4. Environment transitions to state s\_{t+1}
 5. Environment provides reward r\_{t+1}
 6. Repeat
@@ -66,7 +66,7 @@ The RL process follows this cycle:
 Most RL problems in robotics can be formulated as Markov Decision Processes, where the next state depends only on the current state and action, not on the history of previous states:
 
 ```
-P(s_{t+1}|s_t, a_t) = P(s_{t+1}|s_0, a_0, ..., s_t, a_t)
+P(s\_{t+1}|s\_t, a\_t) = P(s\_{t+1}|s\_0, a\_0, ..., s\_t, a\_t)
 ```
 
 This Markov property is crucial for efficient learning algorithms.

@@ -37,7 +37,7 @@ The forward kinematics of a humanoid robot can be represented using homogeneous 
 T = T1(θ1) * T2(θ2) * ... * Tn(θn)
 ```
 
-Where T is the final transformation matrix representing the end-effector pose relative to the base frame, and Ti(θi) represents the transformation due to joint i with angle θi.
+Where T is the final transformation matrix representing the end-effector pose relative to the base frame, and T\_i(θ\_i) represents the transformation due to joint i with angle θ\_i.
 
 ### Humanoid-Specific Considerations
 
