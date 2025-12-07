@@ -1,0 +1,9 @@
+{
+  "label": "Chapter 11: Humanoid Robot Development",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Explore the fundamentals of humanoid robot development, including kinematics, dynamics, and control systems."
+  },
+  "module": 4
+}
