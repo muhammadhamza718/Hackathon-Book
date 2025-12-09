@@ -75,6 +75,7 @@ const config: Config = {
           position: "left",
           label: "📖 Book",
         },
+        { to: "/chatbot", label: "🤖 Chatbot", position: "left" },
         { to: "/blog", label: "Blog", position: "left" },
         {
           type: "search",
@@ -145,6 +146,23 @@ const config: Config = {
       },
     },
   } satisfies Preset.ThemeConfig,
+
+  plugins: [
+    [
+      "@docusaurus/plugin-client-redirects",
+      {
+        fromExtensions: ["html"],
+      },
+    ],
+  ],
+};
+
+// Add environment variables to the client bundle
+const { REACT_APP_API_BASE_URL = "http://localhost:7860" } = process.env;
+
+// Add the environment variable to the config
+config.customFields = {
+  REACT_APP_API_BASE_URL,
 };
 
 export default config;
