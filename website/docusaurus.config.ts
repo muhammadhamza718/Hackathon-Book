@@ -75,7 +75,6 @@ const config: Config = {
           position: "left",
           label: "📖 Book",
         },
-        { to: "/chatbot", label: "🤖 Chatbot", position: "left" },
         { to: "/blog", label: "Blog", position: "left" },
         {
           type: "search",
