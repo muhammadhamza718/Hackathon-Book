@@ -1,0 +1,79 @@
+import type { ReactNode } from "react";
+import clsx from "clsx";
+import Link from "@docusaurus/Link";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import Layout from "@theme/Layout";
+import HomepageFeatures from "@site/src/components/HomepageFeatures";
+import Heading from "@theme/Heading";
+import HeroAnimation from "@site/src/components/HeroAnimation";
+
+import styles from "./index.module.css";
+
+function HomepageHeader() {
+  const { siteConfig } = useDocusaurusContext();
+  return (
+    <header
+      className={clsx("hero hero--primary", styles.heroBanner)}
+      style={{ position: "relative", overflow: "hidden" }}
+    >
+      <HeroAnimation />
+      <div
+        className="container"
+        style={{
+          position: "relative",
+          zIndex: 1,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100%",
+          textAlign: "center",
+        }}
+      >
+        <div
+          className="glass-card"
+          style={{
+            padding: "2rem",
+            borderRadius: "1rem",
+            display: "inline-block",
+          }}
+        >
+          <Heading as="h1" className="hero__title">
+            {siteConfig.title}
+          </Heading>
+          <p className="hero__subtitle">{siteConfig.tagline}</p>
+          <div className={styles.buttons}>
+            <Link
+              className="button button--secondary button--lg"
+              to="/docs/Module-1/chapter-1-introduction-to-ros-2/lesson-1-introduction-to-ros-2"
+            >
+              🚀 Start Learning - 5min ⏱️
+            </Link>
+            <Link
+              className="button button--outline button--secondary button--lg"
+              to="/docs/Module-1/chapter-1-introduction-to-ros-2/lesson-1-introduction-to-ros-2"
+              style={{ marginLeft: "10px" }}
+            >
+              📚 View All Chapters
+            </Link>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+export default function Home(): ReactNode {
+  const { siteConfig } = useDocusaurusContext();
+  return (
+    <Layout
+      title={`${siteConfig.title} - Complete Textbook`}
+      description="Comprehensive guide to Physical AI & Humanoid Robotics covering ROS 2, Simulation, AI, and Humanoid Robot Development"
+    >
+      <HomepageHeader />
+      <main>
+        <HomepageFeatures />
+      </main>
+    </Layout>
+  );
+}

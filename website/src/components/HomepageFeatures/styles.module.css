@@ -1,0 +1,121 @@
+.features {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 0;
+  width: 100%;
+  position: relative;
+  background: transparent;
+}
+
+.featureCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  height: 100%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  /* Remove old static top border */
+}
+
+/* Dynamic Top Border Animation */
+.featureCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  /* Use variable for dynamic color */
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--feature-color),
+    transparent
+  );
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  /* Dynamic shadow glow */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2),
+    0 0 20px var(--feature-color, rgba(0, 243, 255, 0.1));
+}
+
+.featureCard:hover::before {
+  transform: scaleX(1);
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 85%;
+}
+
+
+.emojiContainer {
+  font-size: 4rem; /* Increased size to match visual weight of reference icons */
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+  transition: all 0.3s ease;
+}
+
+.featureCard:hover .emojiContainer {
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 0 15px var(--feature-color));
+}
+
+.title {
+  color: #fff !important;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  font-family: "Audiowide", sans-serif; /* Keep the font if it was there */
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.5rem;
+  min-height: 40px;
+}
+
+[data-theme="light"] .featureCard {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+[data-theme="light"] .title {
+  color: #000 !important;
+}
+[data-theme="light"] .description {
+  color: #4a5568;
+}
+
+/* Button styles - kept from original but polished */
+.button {
+  background-color: transparent;
+  color: var(--feature-color);
+  border: 1px solid var(--feature-color);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border-radius: 50px; /* More modern */
+  padding: 1rem 1rem 1rem;
+}
+
+.button:hover {
+  background-color: var(--feature-color);
+  color: #fff; /* Assuming white text on colored bg is readable */
+  box-shadow: 0 0 15px var(--feature-color);
+  border-color: var(--feature-color);
+  text-decoration: none;
+}
