@@ -67,7 +67,7 @@ const FeatureList: FeatureItem[] = [
 
 function Feature({ title, emoji, description, link, color }: FeatureItem) {
   return (
-    <div className={clsx("col col--3")}>
+    <div className={clsx("col col--3 margin-bottom--lg")}>
       <div
         className={clsx("card", styles.featureCard)}
         style={{ "--feature-color": color } as CSSProperties}
@@ -102,7 +102,7 @@ function Feature({ title, emoji, description, link, color }: FeatureItem) {
 export default function HomepageFeatures(): ReactNode {
   return (
     <section className={styles.features}>
-      <div className="container">
+      <div className={styles.container}>
         <div className="text--center margin-bottom--lg">
           <Heading as="h2">Explore the Complete Curriculum</Heading>
           <p className={styles.subtitle}>

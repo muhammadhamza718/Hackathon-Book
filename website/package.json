@@ -22,7 +22,14 @@
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
+<<<<<<< HEAD
     "react-dom": "^19.0.0"
+=======
+    "react-dom": "^19.0.0",
+    "@tsparticles/engine": "^3.5.0",
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/slim": "^3.5.0"
+>>>>>>> 8f2f4e0 (Better UI/UX)
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.9.2",

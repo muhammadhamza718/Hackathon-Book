@@ -4,49 +4,151 @@
  * work well for content-centric websites.
  */
 
-/* You can override the default Infima variables here. */
+
+/* PRELOAD FONTS */
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@400;600;700&display=swap");
+
+/* GLOBAL VARIABLES */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
+  /* PREMIUM NEON PALETTE */
+  --ifm-color-primary: #00f3ff; /* Neon Cyan */
+  --ifm-color-primary-dark: #00dbbad;
+  --ifm-color-primary-darker: #00c4ce;
+  --ifm-color-primary-darkest: #00a1a9;
+  --ifm-color-primary-light: #2df5ff;
+  --ifm-color-primary-lighter: #44f6ff;
+  --ifm-color-primary-lightest: #8affff;
+
+  --ifm-font-family-base: "Inter", system-ui, -apple-system, Segoe UI, Roboto,
+    Ubuntu, Cantarell, Noto Sans, sans-serif;
+  --ifm-heading-font-family: "Audiowide", "Inter", sans-serif;
+
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  /* CUSTOM COLORS */
+  --site-primary-glow: 0 0 20px rgba(0, 243, 255, 0.5);
+  --site-secondary: #bc13fe; /* Electric Purple */
+  --site-bg-deep: #0a0b1e;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-blur: blur(12px);
 }
 
-/* Override hero background */
+/* HERO SECTION OVERRIDE */
 .hero--primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Change this color */
+  background: var(--site-bg-deep); /* Use deep space background */
+  position: relative;
+  overflow: hidden; /* For particles */
 }
 
-/* Light mode: Black text on hero */
+/* Light mode overrides (keep readable but premium) */
 .hero--primary .hero__title,
 .hero--primary .hero__subtitle {
-  color: #000000;
+  color: #ffffff; /* Always white on dark hero */
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+/* GLASSMORPHISM UTILITY */
+.glass-card {
+  background: rgba(10, 11, 30, 0.6); /* Semi-transparent dark bg */
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-/* Dark mode hero background */
-[data-theme='dark'] .hero--primary {
-  background: linear-gradient(135deg, #545479 0%, #102152 100%); /* Dark mode gradient */
+/* NAVBAR POLISH */
+.navbar {
+  background-color: rgba(10, 11, 30, 0.85); /* Dark semi-transparent */
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--glass-border);
 }
 
-/* Dark mode: White text on hero */
-[data-theme='dark'] .hero--primary .hero__title,
-[data-theme='dark'] .hero--primary .hero__subtitle {
-  color: #ffffff;
+.navbar__title {
+  font-family: "Audiowide", sans-serif;
+  letter-spacing: 1px;
 }
+
+/* BUTTONS */
+.button--secondary {
+  background: transparent;
+  border: 2px solid var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+  transition: all 0.3s ease;
+  font-family: "Audiowide", sans-serif;
+}
+
+.button--secondary:hover {
+  background: var(--ifm-color-primary);
+  color: #000;
+  box-shadow: var(--site-primary-glow);
+  transform: translateY(-2px);
+  border-color: var(--ifm-color-primary);
+}
+
+.button--outline.button--secondary {
+  border-color: var(--site-secondary);
+  color: var(--site-secondary);
+}
+
+.button--outline.button--secondary:hover {
+  background: var(--site-secondary);
+  color: white;
+  box-shadow: 0 0 20px rgba(188, 19, 254, 0.5);
+  border-color: var(--site-secondary);
+}
+
+/* DARK MODE SPECIFIC */
+[data-theme="dark"] {
+  --ifm-color-primary: #00f3ff;
+  --ifm-background-color: #050510; /* Very dark blue/black */
+  --ifm-navbar-background-color: rgba(5, 5, 16, 0.9);
+}
+
+/* CARD STYLING */
+.card {
+  background: #12142b;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--ifm-color-primary);
+  box-shadow: var(--site-primary-glow);
+}
+
+/* FORCE PARTICLES TO FILL CONTAINER */
+#tsparticles {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+/* NAVBAR TEXT FIX */
+.navbar__item,
+.navbar__link {
+  color: #fff !important;
+}
+
+.navbar__item:hover,
+.navbar__link:hover {
+  color: var(--ifm-color-primary) !important;
+}
+
+/* Ensure the logo text is also white if it's text-based */
+.navbar__title {
+  color: #fff !important;
+}
+
+/* FIX NAVBAR TOGGLE BUTTON & ICONS */
+.navbar .clean-btn {
+  color: #fff !important;
+}
+.navbar svg {
+  fill: #fff !important;
+}
+
