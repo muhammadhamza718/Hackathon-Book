@@ -1,9 +1,11 @@
-import { auth } from "../../website/src/lib/auth";
+/**
+ * Better Auth API Route Handler
+ * ESM Sandbox version at root
+ */
+import { auth } from "../lib/auth.js";
+import { toNodeHandler } from "better-auth/node";
 
-export const config = {
-  runtime: "edge",
-};
+// Disallow body parsing for auth handler
+export const config = { api: { bodyParser: false } };
 
-export default async (req: Request) => {
-  return auth.handler(req);
-};
+export default toNodeHandler(auth.handler);

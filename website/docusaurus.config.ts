@@ -13,9 +13,10 @@ const config: Config = {
   },
 
   // Update these for your GitHub Pages deployment
-  url: "https://hackathon-book-mwoqt91dl-muhammad-hamzas-projects-88f218fc.vercel.app/", // Replace with your GitHub username
-  baseUrl: "/", // Replace with your repo name if different
-
+  url: process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "https://hackathon-book-ruby.vercel.app",
+  baseUrl: "/",
   // GitHub pages deployment config
   organizationName: "muhammadhamzas-projects", // Replace with your GitHub username
   projectName: "hackathon-book", // Replace with your repo name

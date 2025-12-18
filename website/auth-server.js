@@ -13,7 +13,7 @@ let auth;
 let authHandler;
 
 const initAuth = async () => {
-  const authModule = await import("./api/lib/auth.ts");
+  const authModule = await import("../api/lib/auth.ts");
   auth = authModule.auth;
   console.log("Auth module loaded:", !!auth);
 
@@ -43,8 +43,7 @@ app.use(
   })
 );
 
-// Better Auth API handler
-const authHandler = toNodeHandler(auth.handler);
+// Better Auth API handler will be initialized in the middleware
 
 // Handle specific auth routes first (before the general middleware)
 app.get("/auth/test", (req, res) => {
