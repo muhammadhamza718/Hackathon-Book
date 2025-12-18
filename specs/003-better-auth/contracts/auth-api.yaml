@@ -1,0 +1,368 @@
+openapi: 3.0.3
+info:
+  title: Better Auth Authentication API
+  description: API endpoints for user authentication, signup, and profile management
+  version: 1.0.0
+  contact:
+    name: Hackathon Book Project
+
+servers:
+  - url: http://localhost:3000/api/auth
+    description: Development server
+  - url: https://hackathon-book.vercel.app/api/auth
+    description: Production server
+
+paths:
+  /sign-up/email:
+    post:
+      summary: Create new user account with background questionnaire
+      description: Register a new user with email/password and technical background information
+      operationId: signUpEmail
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+                - name
+                - softwareExperience
+                - aiMlFamiliarity
+                - hardwareExperience
+                - learningGoals
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "john.doe@example.com"
+                password:
+                  type: string
+                  minLength: 8
+                  example: "SecurePass123!"
+                name:
+                  type: string
+                  example: "John Doe"
+                softwareExperience:
+                  type: string
+                  enum: ["beginner", "intermediate", "advanced", "expert"]
+                  example: "intermediate"
+                aiMlFamiliarity:
+                  type: string
+                  enum: ["none", "basic", "intermediate", "advanced"]
+                  example: "basic"
+                hardwareExperience:
+                  type: string
+                  enum: ["none", "hobbyist", "professional", "educator"]
+                  example: "hobbyist"
+                learningGoals:
+                  type: string
+                  enum:
+                    [
+                      "career_change",
+                      "skill_upgrade",
+                      "research",
+                      "teaching",
+                      "hobby",
+                    ]
+                  example: "skill_upgrade"
+                programmingLanguages:
+                  type: string
+                  example: "Python, JavaScript"
+                  description: "Comma-separated list of familiar languages"
+      responses:
+        "200":
+          description: Account created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: "#/components/schemas/User"
+                  session:
+                    $ref: "#/components/schemas/Session"
+        "400":
+          description: Validation error or email already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /sign-in/email:
+    post:
+      summary: Authenticate existing user
+      description: Sign in with email and password, returns session cookie
+      operationId: signInEmail
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "john.doe@example.com"
+                password:
+                  type: string
+                  example: "SecurePass123!"
+      responses:
+        "200":
+          description: Authentication successful
+          headers:
+            Set-Cookie:
+              description: HTTP-only session cookie
+              schema:
+                type: string
+                example: "hackathon_session=abc123; HttpOnly; Secure; SameSite=Lax; Max-Age=604800"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: "#/components/schemas/User"
+                  session:
+                    $ref: "#/components/schemas/Session"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: Too many login attempts
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /sign-out:
+    post:
+      summary: End user session
+      description: Invalidate current session and clear cookies
+      operationId: signOut
+      tags:
+        - Authentication
+      security:
+        - sessionCookie: []
+      responses:
+        "200":
+          description: Logout successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+        "401":
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /session:
+    get:
+      summary: Get current user session
+      description: Retrieve authenticated user information and session details
+      operationId: getSession
+      tags:
+        - Authentication
+      security:
+        - sessionCookie: []
+      responses:
+        "200":
+          description: Session active
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: "#/components/schemas/User"
+                  session:
+                    $ref: "#/components/schemas/Session"
+        "401":
+          description: No active session
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: null
+                  session:
+                    type: null
+
+  /update-user:
+    patch:
+      summary: Update user profile and questionnaire
+      description: Modify user's background information and profile settings
+      operationId: updateUser
+      tags:
+        - Profile
+      security:
+        - sessionCookie: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Jane Doe"
+                softwareExperience:
+                  type: string
+                  enum: ["beginner", "intermediate", "advanced", "expert"]
+                aiMlFamiliarity:
+                  type: string
+                  enum: ["none", "basic", "intermediate", "advanced"]
+                hardwareExperience:
+                  type: string
+                  enum: ["none", "hobbyist", "professional", "educator"]
+                learningGoals:
+                  type: string
+                  enum:
+                    [
+                      "career_change",
+                      "skill_upgrade",
+                      "research",
+                      "teaching",
+                      "hobby",
+                    ]
+                programmingLanguages:
+                  type: string
+      responses:
+        "200":
+          description: Profile updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: "#/components/schemas/User"
+        "401":
+          description: Not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "user_abc123xyz"
+        email:
+          type: string
+          format: email
+          example: "john.doe@example.com"
+        name:
+          type: string
+          example: "John Doe"
+        emailVerified:
+          type: boolean
+          example: false
+        createdAt:
+          type: string
+          format: date-time
+          example: "2025-12-16T10:00:00Z"
+        softwareExperience:
+          type: string
+          enum: ["beginner", "intermediate", "advanced", "expert"]
+          example: "intermediate"
+        aiMlFamiliarity:
+          type: string
+          enum: ["none", "basic", "intermediate", "advanced"]
+          example: "basic"
+        hardwareExperience:
+          type: string
+          enum: ["none", "hobbyist", "professional", "educator"]
+          example: "hobbyist"
+        learningGoals:
+          type: string
+          enum:
+            ["career_change", "skill_upgrade", "research", "teaching", "hobby"]
+          example: "skill_upgrade"
+        programmingLanguages:
+          type: string
+          nullable: true
+          example: "Python, JavaScript"
+
+    Session:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "session_def456uvw"
+        userId:
+          type: string
+          example: "user_abc123xyz"
+        expiresAt:
+          type: string
+          format: date-time
+          example: "2025-12-23T10:00:00Z"
+        token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        createdAt:
+          type: string
+          format: date-time
+          example: "2025-12-16T10:00:00Z"
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Invalid email or password"
+        code:
+          type: string
+          example: "AUTH_ERROR"
+        details:
+          type: object
+          additionalProperties: true
+
+  securitySchemes:
+    sessionCookie:
+      type: apiKey
+      in: cookie
+      name: hackathon_session
+      description: HTTP-only session cookie set after authentication
+
+tags:
+  - name: Authentication
+    description: User signup, signin, and session management
+  - name: Profile
+    description: User profile and questionnaire management

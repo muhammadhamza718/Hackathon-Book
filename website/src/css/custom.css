@@ -11,15 +11,16 @@
 :root {
   /* PREMIUM NEON PALETTE */
   --ifm-color-primary: #00f3ff; /* Neon Cyan */
-  --ifm-color-primary-dark: #00dbbad;
+  --ifm-color-primary-dark: #00dbad;
   --ifm-color-primary-darker: #00c4ce;
   --ifm-color-primary-darkest: #00a1a9;
   --ifm-color-primary-light: #2df5ff;
   --ifm-color-primary-lighter: #44f6ff;
   --ifm-color-primary-lightest: #8affff;
 
-  --ifm-font-family-base: "Inter", system-ui, -apple-system, Segoe UI, Roboto,
-    Ubuntu, Cantarell, Noto Sans, sans-serif;
+  --ifm-font-family-base:
+    "Inter", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+    Noto Sans, sans-serif;
   --ifm-heading-font-family: "Audiowide", "Inter", sans-serif;
 
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
@@ -127,26 +128,25 @@
   z-index: 0;
 }
 
-/* NAVBAR TEXT FIX */
-.navbar__item,
-.navbar__link {
+/* NAVBAR TEXT FIX - Dark Mode Only */
+[data-theme="dark"] .navbar__item,
+[data-theme="dark"] .navbar__link {
   color: #fff !important;
 }
 
-.navbar__item:hover,
-.navbar__link:hover {
+[data-theme="dark"] .navbar__item:hover,
+[data-theme="dark"] .navbar__link:hover {
   color: var(--ifm-color-primary) !important;
 }
 
-/* Ensure the logo text is also white if it's text-based */
-.navbar__title {
+[data-theme="dark"] .navbar__title {
   color: #fff !important;
 }
 
-/* FIX NAVBAR TOGGLE BUTTON & ICONS */
-.navbar .clean-btn {
+[data-theme="dark"] .navbar .clean-btn {
   color: #fff !important;
 }
-.navbar svg {
+
+[data-theme="dark"] .navbar svg {
   fill: #fff !important;
 }

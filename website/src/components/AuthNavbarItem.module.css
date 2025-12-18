@@ -1,0 +1,112 @@
+/* AuthNavbarItem Styling - Matching Form Buttons */
+
+.authButtons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 0.5rem;
+}
+
+/* Sign In Button - Outline Style (Secondary Action) */
+.signinBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid var(--ifm-color-primary);
+  border-radius: 0.5rem;
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+  text-decoration: none !important;
+  font-size: 0.95rem;
+  font-family: "Audiowide", sans-serif;
+  transition: all 0.2s ease;
+}
+
+.signinBtn:hover {
+  background: rgba(0, 243, 255, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 243, 255, 0.3);
+  color: var(--ifm-color-primary);
+  text-decoration: none !important;
+}
+
+/* Sign Up Button - Same Outline Style as Sign In */
+.signupBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid var(--ifm-color-primary);
+  border-radius: 0.5rem;
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+  text-decoration: none !important;
+  font-size: 0.95rem;
+  font-family: "Audiowide", sans-serif;
+  transition: all 0.2s ease;
+}
+
+.signupBtn:hover {
+  background: rgba(0, 243, 255, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 243, 255, 0.3);
+  color: var(--ifm-color-primary);
+  text-decoration: none !important;
+}
+
+/* Shine effect */
+.shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  20% {
+    left: 200%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+.loadingPlaceholder {
+  width: 100px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 996px) {
+  .authButtons {
+    display: none;
+  }
+}

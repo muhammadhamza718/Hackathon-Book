@@ -1,6 +1,7 @@
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
+import path from "path";
 
 const config: Config = {
   title: "Physical AI & Humanoid Robotics",
@@ -59,7 +60,7 @@ const config: Config = {
     colorMode: {
       defaultMode: "light",
       disableSwitch: false,
-      respectPrefersColorScheme: true,
+      respectPrefersColorScheme: false,
     },
 
     navbar: {
@@ -76,6 +77,10 @@ const config: Config = {
           label: "📖 Book",
         },
         { to: "/blog", label: "Blog", position: "left" },
+        {
+          type: "custom-auth-item",
+          position: "right",
+        },
         {
           type: "search",
           position: "right",
@@ -153,6 +158,20 @@ const config: Config = {
         fromExtensions: ["html"],
       },
     ],
+    function (context, options) {
+      return {
+        name: "custom-docusaurus-plugin",
+        configureWebpack(config, isServer, utils) {
+          return {
+            resolve: {
+              alias: {
+                "@": path.resolve(context.siteDir, "src"),
+              },
+            },
+          };
+        },
+      };
+    },
   ],
 };
 
