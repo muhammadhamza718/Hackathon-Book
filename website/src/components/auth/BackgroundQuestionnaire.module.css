@@ -1,0 +1,115 @@
+/* Background Questionnaire Styling - Premium Professional */
+
+.questionnaireContainer {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.5); /* Light mode: Semi-transparent white */
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+[data-theme="dark"] .questionnaireContainer {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.questionnaireTitle {
+  font-family: "Audiowide", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.25rem;
+  text-align: left;
+  letter-spacing: 0.5px;
+}
+
+.questionnaireSubtitle {
+  text-align: left;
+  color: var(--ifm-color-emphasis-600);
+  margin-bottom: 1.25rem;
+  font-size: 0.9rem;
+}
+
+[data-theme="dark"] .questionnaireSubtitle {
+  color: var(--ifm-color-emphasis-400);
+}
+
+.formGroup {
+  margin-bottom: 1.25rem;
+}
+
+.label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-800);
+}
+
+[data-theme="dark"] .label {
+  color: #fff;
+}
+
+.tooltip {
+  font-size: 0.75rem;
+  color: var(--ifm-color-emphasis-500);
+  font-style: italic;
+  margin-left: 0.5rem;
+  background: rgba(var(--ifm-color-emphasis-200-rgb), 0.3);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.select,
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #fff; /* Explicit white for light mode */
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  color: #000;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .select,
+[data-theme="dark"] .input {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.select:focus,
+.input:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 243, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .select:focus,
+[data-theme="dark"] .input:focus {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Ensure options are readable */
+.select option {
+  background-color: #fff;
+  color: #000;
+}
+
+[data-theme="dark"] .select option {
+  background-color: #0b0c15;
+  color: #fff;
+}
+
+.errorMessage {
+  display: block;
+  color: #ff4444;
+  font-size: 0.85rem;
+  margin-top: 0.35rem;
+}

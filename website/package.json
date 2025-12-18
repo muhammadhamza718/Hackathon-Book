@@ -5,6 +5,8 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
+    "start:auth": "tsx auth-server.js",
+    "dev": "concurrently \"npm run start\" \"npm run start:auth\"",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -15,26 +17,30 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@better-auth/cli": "^1.4.7",
     "@docusaurus/core": "3.9.2",
     "@docusaurus/plugin-client-redirects": "^3.9.2",
     "@docusaurus/preset-classic": "3.9.2",
     "@mdx-js/react": "^3.0.0",
-    "clsx": "^2.0.0",
-    "prism-react-renderer": "^2.3.0",
-    "react": "^19.0.0",
-<<<<<<< HEAD
-    "react-dom": "^19.0.0"
-=======
-    "react-dom": "^19.0.0",
+    "@neondatabase/serverless": "^1.0.2",
     "@tsparticles/engine": "^3.5.0",
     "@tsparticles/react": "^3.0.0",
-    "@tsparticles/slim": "^3.5.0"
->>>>>>> 8f2f4e0 (Better UI/UX)
+    "@tsparticles/slim": "^3.5.0",
+    "better-auth": "^1.4.7",
+    "clsx": "^2.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "prism-react-renderer": "^2.3.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.9.2",
     "@docusaurus/tsconfig": "3.9.2",
     "@docusaurus/types": "3.9.2",
+    "concurrently": "^9.2.1",
+    "tsx": "^4.21.0",
     "typescript": "~5.6.2"
   },
   "browserslist": {
