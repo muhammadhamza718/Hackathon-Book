@@ -4,7 +4,7 @@ title: Resolving Signup 404 Not Found in Serverless Environment
 stage: red
 date_iso: 2024-11-24
 surface: agent
-model: claude-3-5-sonnet
+model: qwen3-coder-plus
 feature: better-auth
 branch: main
 user: muhammadhamza718

@@ -4,7 +4,7 @@ title: Correcting TypeScript Type Inference and Navbar Stability
 stage: red
 date_iso: 2024-11-26
 surface: agent
-model: claude-3-5-sonnet
+model: qwen3-coder-plus
 feature: better-auth
 branch: main
 user: muhammadhamza718
