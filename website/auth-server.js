@@ -7,20 +7,30 @@ const path = require("path");
 const { createRequire } = require("module");
 const requireFromCwd = createRequire(process.cwd());
 
-// Since we're using tsx, we can import the TypeScript module directly
-const authModule = require("./src/lib/auth");
-const { auth } = authModule;
+// Use dynamic import for the ESM auth configuration
+// This works with tsx and allows loading ESM from this CJS file
+let auth;
+let authHandler;
 
-// Debug: Check if auth is properly loaded
-console.log("Auth module loaded:", !!auth);
-console.log("Auth object type:", typeof auth);
-console.log("Auth handler type:", typeof auth?.handler);
+const initAuth = async () => {
+  const authModule = await import("./api/lib/auth.ts");
+  auth = authModule.auth;
+  console.log("Auth module loaded:", !!auth);
 
-// Import the toNodeHandler from better-auth/node
-const { toNodeHandler } = require("better-auth/node");
+  const { toNodeHandler } = require("better-auth/node");
+  authHandler = toNodeHandler(auth.handler);
+};
 
 const app = express();
 const port = process.env.API_PORT || 7860;
+
+// Middleware to parse authHandler after initialization
+app.use(async (req, res, next) => {
+  if (!authHandler) {
+    await initAuth();
+  }
+  next();
+});
 
 // Middleware to parse JSON - apply at app level
 app.use(express.json());
