@@ -8,22 +8,25 @@ const pool = new Pool({
 
 /**
  * Get the base URL for Better Auth
- * It first checks for an explicit env var, then Vercel deployment URL,
- * then defaults to localhost for development.
+ * It first checks for an explicit env var, then VERCEL_URL,
+ * and MUST include /api/auth for the server-side to match correctly.
  */
 const getBaseURL = () => {
+  let origin = "";
   if (process.env.BETTER_AUTH_URL) {
-    // Ensure no trailing slash
-    return process.env.BETTER_AUTH_URL.replace(/\/$/, "");
+    origin = process.env.BETTER_AUTH_URL.replace(/\/$/, "");
+  } else if (process.env.VERCEL_URL) {
+    origin = `https://${process.env.VERCEL_URL}`;
+  } else {
+    origin = "http://localhost:3000";
   }
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`;
-  }
-  return "http://localhost:3000";
+
+  // Explicitly append /api/auth to ensure route matching
+  return `${origin}/api/auth`;
 };
 
 const baseUrl = getBaseURL();
-console.log(`[AUTH-CONFIG] Initializing with baseURL: ${baseUrl}`);
+console.log(`[AUTH-CONFIG] Initializing with server-side baseURL: ${baseUrl}`);
 
 export const auth = betterAuth({
   // Database configuration

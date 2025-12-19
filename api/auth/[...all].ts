@@ -1,34 +1,35 @@
 /**
- * Better Auth API Route Handler
- * ESM Sandbox version at root with logging
+ * Better Auth API Route Handler - Edge Version
+ * Optimized for Vercel Edge Runtime and ESM
  */
 import { auth } from "../lib/auth.js";
-import { toNodeHandler } from "better-auth/node";
 
-// Disallow body parsing for auth handler
-export const config = { api: { bodyParser: false } };
+export const config = {
+  runtime: "edge",
+};
 
-const authHandler = toNodeHandler(auth.handler);
-
-export default async (req: any, res: any) => {
-  // Enhanced Logging for debugging 404s
-  const fullUrl = req.url || "unknown";
-  console.log(`[AUTH-API] ${req.method} request to ${fullUrl}`);
-
-  // Check if this is a POST request and if it might be missing from logs
-  if (req.method === "POST") {
-    console.log(`[AUTH-API] POST payload expected for ${fullUrl}`);
-  }
+export default async (req: Request) => {
+  const url = new URL(req.url);
+  console.log(`[AUTH-EDGE] ${req.method} request to ${url.pathname}`);
 
   try {
-    return await authHandler(req, res);
+    const response = await auth.handler(req);
+
+    // Log response status for verification
+    console.log(`[AUTH-EDGE] Response Status: ${response.status}`);
+
+    return response;
   } catch (error: any) {
-    console.error(`[AUTH-API-ERROR]`, error);
-    if (!res.headersSent) {
-      res.status(500).json({
-        message: "Internal Auth Error",
+    console.error(`[AUTH-EDGE-ERROR]`, error);
+    return new Response(
+      JSON.stringify({
+        message: "Edge Auth Error",
         error: error.message,
-      });
-    }
+      }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 };

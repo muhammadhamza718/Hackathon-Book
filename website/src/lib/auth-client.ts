@@ -12,9 +12,9 @@ export const authClient = createAuthClient({
   baseURL:
     typeof window !== "undefined"
       ? window.location.origin.includes("localhost")
-        ? "http://localhost:7860"
+        ? "http://localhost:7860" // Matches auth-server.js port
         : window.location.origin
-      : "http://localhost:7860",
+      : "http://localhost:3000",
   plugins: [inferAdditionalFields<typeof auth>()],
 });
 
