@@ -6,6 +6,25 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
+/**
+ * Get the base URL for Better Auth
+ * It first checks for an explicit env var, then Vercel deployment URL,
+ * then defaults to localhost for development.
+ */
+const getBaseURL = () => {
+  if (process.env.BETTER_AUTH_URL) {
+    // Ensure no trailing slash
+    return process.env.BETTER_AUTH_URL.replace(/\/$/, "");
+  }
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  return "http://localhost:3000";
+};
+
+const baseUrl = getBaseURL();
+console.log(`[AUTH-CONFIG] Initializing with baseURL: ${baseUrl}`);
+
 export const auth = betterAuth({
   // Database configuration
   database: pool,
@@ -51,13 +70,12 @@ export const auth = betterAuth({
 
   // Security settings
   advanced: {
-    useSecureCookies: process.env.NODE_ENV === "production",
+    useSecureCookies: true, // Always use secure cookies on Vercel
     crossSubDomainCookies: { enabled: false },
   },
 
   // Base URL for authentication endpoints
-  // This must be set to the absolute domain on Vercel
-  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
+  baseURL: baseUrl,
 
   // Secret for signing cookies and tokens
   secret: process.env.BETTER_AUTH_SECRET,

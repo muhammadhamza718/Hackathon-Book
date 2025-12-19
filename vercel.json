@@ -1,9 +1,9 @@
 {
   "version": 2,
-  "functions": {
-    "api/auth/[...all].ts": {
-      "memory": 1024,
-      "maxDuration": 10
+  "rewrites": [
+    {
+      "source": "/api/auth/:path*",
+      "destination": "/api/auth/[...all]"
     }
-  }
+  ]
 }

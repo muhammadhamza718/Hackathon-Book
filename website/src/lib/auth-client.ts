@@ -10,13 +10,11 @@ import type { auth } from "../../../api/lib/auth";
 
 export const authClient = createAuthClient({
   baseURL:
-    typeof process !== "undefined" && process.env.REACT_APP_API_BASE_URL
-      ? process.env.REACT_APP_API_BASE_URL
-      : typeof window !== "undefined"
-        ? window.location.origin.includes("localhost")
-          ? "http://localhost:7860" // Separate auth server for local development
-          : window.location.origin
-        : "http://localhost:7860",
+    typeof window !== "undefined"
+      ? window.location.origin.includes("localhost")
+        ? "http://localhost:7860"
+        : window.location.origin
+      : "http://localhost:7860",
   plugins: [inferAdditionalFields<typeof auth>()],
 });
 
