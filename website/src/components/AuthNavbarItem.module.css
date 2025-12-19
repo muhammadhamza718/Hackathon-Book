@@ -9,12 +9,14 @@
 
 /* Sign In Button - Outline Style (Secondary Action) */
 .signinBtn {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.25rem;
   background: transparent;
   border: 1px solid var(--ifm-color-primary);
-  border-radius: 0.5rem;
+  border-radius: 0.75rem; /* Smoother rounded corners */
   color: var(--ifm-color-primary);
   font-weight: 600;
   text-decoration: none !important;
@@ -25,20 +27,22 @@
 
 .signinBtn:hover {
   background: rgba(0, 243, 255, 0.1);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 243, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 243, 255, 0.3);
   color: var(--ifm-color-primary);
   text-decoration: none !important;
 }
 
-/* Sign Up Button - Same Outline Style as Sign In */
+/* Sign Up Button - Matching Style */
 .signupBtn {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.25rem;
   background: transparent;
   border: 1px solid var(--ifm-color-primary);
-  border-radius: 0.5rem;
+  border-radius: 0.75rem; /* Smoother rounded corners */
   color: var(--ifm-color-primary);
   font-weight: 600;
   text-decoration: none !important;

@@ -109,7 +109,17 @@
 .card {
   background: #12142b;
   border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: transform 0.2s;
+  border-radius: 1rem; /* Rounded corners as requested */
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+  overflow: hidden; /* Ensure content stays inside */
+}
+
+/* Fix horizontal scrollbar */
+html,
+body {
+  overflow-x: hidden;
 }
 
 .card:hover {
