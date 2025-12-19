@@ -139,24 +139,19 @@ body {
 }
 
 /* NAVBAR TEXT FIX - Dark Mode Only */
-[data-theme="dark"] .navbar__item,
-[data-theme="dark"] .navbar__link {
+/* NAVBAR TEXT COLOR - Forced White/Neon for Readability on Dark Bg */
+.navbar__item,
+.navbar__link,
+.navbar__title,
+.navbar .clean-btn {
   color: #fff !important;
 }
 
-[data-theme="dark"] .navbar__item:hover,
-[data-theme="dark"] .navbar__link:hover {
+.navbar__item:hover,
+.navbar__link:hover {
   color: var(--ifm-color-primary) !important;
 }
 
-[data-theme="dark"] .navbar__title {
-  color: #fff !important;
-}
-
-[data-theme="dark"] .navbar .clean-btn {
-  color: #fff !important;
-}
-
-[data-theme="dark"] .navbar svg {
+.navbar svg {
   fill: #fff !important;
 }
